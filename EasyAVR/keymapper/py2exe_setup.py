@@ -7,7 +7,6 @@ import py2exe
 from glob import glob
 from easykeymap import __version__
 
-
 RT_BITMAP = 2
 RT_MANIFEST = 24
 
@@ -67,7 +66,7 @@ py2exe_options = dict(
     optimize=0,
     compressed=False, # uncompressed may or may not have a faster startup
     bundle_files=3,
-    dist_dir='dist_exe',
+    dist_dir='easykeymap_windows_' + __version__.replace('.', '_'),
     )
 
 data_files = [
