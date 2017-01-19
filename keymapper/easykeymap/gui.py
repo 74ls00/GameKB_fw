@@ -354,7 +354,8 @@ class GUI(object):
         Label(modframe, text="Set: ").pack(side=LEFT)
         temp = sorted(scancodes.keys())
         temp2 = [x for x in temp if not x.startswith("SCANCODE_")]
-        setbox = Combobox(modframe, width=40, height=40)
+        setbox = Combobox(modframe, width=40, height=30)
+#!       setbox = Combobox(modframe, width=40, height=40)
         setbox['values'] = temp
         setbox['textvariable'] = self.bindvar
         setbox.state(['readonly'])
@@ -411,7 +412,8 @@ class GUI(object):
         macrosubframe = Frame(macroframe)
         macrosubframe.rowconfigure(0, weight=1)
         macrosubframe.columnconfigure(0, weight=1)
-        self.macrotext = Text(macrosubframe, height=5)
+        self.macrotext = Text(macrosubframe, height=5,  font = (10))
+#!      self.macrotext = Text(macrosubframe, height=5)
         self.macrotext.bind('<<Modified>>', self.macrochange)
         self.macrotext.grid(row=0, column=0, sticky=(N, W, E, S))
         scroll = Scrollbar(macrosubframe, orient=VERTICAL,

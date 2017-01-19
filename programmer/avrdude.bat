@@ -1,12 +1,16 @@
 @echo off
-cls
 title avrdude
 rem set path=%path%;%~d0%~p0
-chcp 1251
+@chcp 1251
 set avrdude=%~d0%~p0
+cls
 
 set port=com7
 set fw=..\keymapper\mykb.hex
+
+echo.
+echo PORT: %port%  FW: %fw%
+echo.
 
 
 rem avrdude.exe -P %port% -c stk500v2 -p m32u4 -v F
