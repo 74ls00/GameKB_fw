@@ -14,7 +14,7 @@ GameKB
 gits
 
 run_log_port.bat
-run_nolog_port .bat
+run_nolog_port.bat
 1.hex
 111.hex
 111.dat
@@ -49,8 +49,8 @@ mint.txt
 
 
 #firmware\EasyAVR\keymapper\easykeymap
-PIL
-PIL.pth
+#PIL
+#PIL.pth
 
 
 Model
