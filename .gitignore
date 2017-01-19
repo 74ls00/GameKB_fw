@@ -32,8 +32,10 @@ b.bat
 dfu-programmer
 dfu-programmer-win-0.7.2
 PortablePythonFull
-
-
+NewLay3.hex
+NewLay3.dat
+mykb.dat
+mykb.hex
 
 
 #firmware\EasyAVR\keymapper

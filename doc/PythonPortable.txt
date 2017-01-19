@@ -8,3 +8,4 @@ pil 1.1.7
 
 
 http://portablepython.com/wiki/PortablePython2.7.6.1/
+https://github.com/cebik/portablepython
