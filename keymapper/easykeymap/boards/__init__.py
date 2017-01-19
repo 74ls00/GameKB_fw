@@ -15,10 +15,11 @@
 # with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 __all__ = [
-'_korbord_b',
+
 '_korbord',
 'atomic',
 'atreus',
+'atreus62',
 'epsilon',
 'filco',
 'filco87',
@@ -30,9 +31,12 @@ __all__ = [
 'gh60_satan',
 'ghpad',
 'jd40',
+'jd40v2',
 'jd45',
 'jd45v2',
+'kc60',
 'kmac',
+'minorca',
 'monarch',
 'octagon',
 'orion',
