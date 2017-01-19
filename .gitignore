@@ -13,6 +13,10 @@ GameKB
 
 gits
 
+run_log_port.bat
+run_nolog_port .bat
+
+
 
 #firmware
 tmk_keyboard.7z
