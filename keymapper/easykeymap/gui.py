@@ -296,32 +296,32 @@ class GUI(object):
         # toolbar
         toolbar = Frame(self.root, borderwidth="1", relief=RAISED)
 
-        eimgnew = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/document-new.png')))	
+        eimgnew = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/document-new.png')))	
         newButton = Button(toolbar, image=eimgnew, command=self.newfile)
         newButton.image = eimgnew
         newButton.pack(side=LEFT, padx=2, pady=2)		
 		
-        eimgopen = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/document-open.png')))		
+        eimgopen = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/document-open.png')))		
         openButton = Button(toolbar, image=eimgopen, command=self.openfile)
         openButton.image = eimgopen
         openButton.pack(side=LEFT, padx=2, pady=2)		
 
-        eimgsave = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/document-save.png')))		
+        eimgsave = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/document-save.png')))		
         saveButton = Button(toolbar, image=eimgsave, command=self.savefile)
         saveButton.image = eimgsave
         saveButton.pack(side=LEFT, padx=2, pady=2)
 		
-        eimgbuild = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/document-save-as.png')))		
+        eimgbuild = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/run-build.png')))		
         buildButton = Button(toolbar, image=eimgbuild, command=self.build)
         buildButton.image = eimgbuild
         buildButton.pack(side=LEFT, padx=2, pady=2)		
 		
-        eimgpicker = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/input-keyboard.png')))		
+        eimgpicker = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/input-keyboard.png')))		
         pickerButton = Button(toolbar, image=eimgpicker, command=self.showpicker)
         pickerButton.image = eimgpicker
         pickerButton.pack(side=LEFT, padx=2, pady=2)			
 		
-        eimgbuildandupload = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/media-flash.png')))		
+        eimgbuildandupload = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/media-flash.png')))		
         buildanduploadButton = Button(toolbar, image=eimgbuildandupload, command=self.fprogram)
         buildanduploadButton.image = eimgbuildandupload
         buildanduploadButton.pack(side=LEFT, padx=2, pady=2)	
