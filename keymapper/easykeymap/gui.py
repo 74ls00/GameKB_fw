@@ -294,10 +294,11 @@ class GUI(object):
 		
 #! 74ls00
         # toolbar
-        toolbar = Frame(self.root, borderwidth="1", relief=RAISED)
+        toolbar = Frame(self.root, borderwidth="1", relief=GROOVE)
 
-        eimgnew = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/document-new.png')))	
+        eimgnew = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/document-new.png')))
         newButton = Button(toolbar, image=eimgnew, command=self.newfile)
+#        newButton["relief"] = "RIDGE"
         newButton.image = eimgnew
         newButton.pack(side=LEFT, padx=2, pady=2)		
 		
@@ -330,7 +331,7 @@ class GUI(object):
 #! 74ls00 end
 		
         # frame to hold info labels
-        infoframe = Frame(self.root)
+        infoframe = Frame(self.root, borderwidth="1")
         Label(infoframe, text="Hardware: ").pack(side=LEFT)
         Label(infoframe, textvariable=self.namevar).pack(side=LEFT)
         Label(infoframe, text="      Layout: ").pack(side=LEFT)
@@ -349,6 +350,7 @@ class GUI(object):
               width=2).pack(side=LEFT)
         infoframe.pack()
         Separator(self.root, orient=HORIZONTAL).pack(fill=X, pady=2)
+		
         # frame to hold the editing controls
         modframe = Frame(self.root)
         Label(modframe, text="Set: ").pack(side=LEFT)
@@ -426,6 +428,8 @@ class GUI(object):
         # set up some styles
         style = Style()
         style.configure("Gold.TButton", background="Gold")
+		
+		
 
 #! 74ls00
 #   настройка програматора
