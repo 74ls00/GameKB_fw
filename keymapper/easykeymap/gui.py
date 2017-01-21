@@ -51,6 +51,9 @@ import traceback
 #! 74ls00
 from PIL import Image, ImageTk
 import subprocess
+import ttk
+#from Tkinter import Button, LEFT, TOP, X, FLAT, RAISED
+#from ttk import TButton
 #! 74ls00 end
 
 if not hasattr(sys, 'frozen'):
@@ -295,34 +298,47 @@ class GUI(object):
 #! 74ls00
         # toolbar
         toolbar = Frame(self.root, borderwidth="1", relief=GROOVE)
+		
+        ttkstyle = ttk.Style()
+        ttkstyle.configure("TButton", relief=FLAT, background="#ccc")
 
         eimgnew = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/document-new.png')))
+#        newButton = Button(toolbar, image=eimgnew, relief=FLAT, command=self.newfile)
+
         newButton = Button(toolbar, image=eimgnew, command=self.newfile)
-#        newButton["relief"] = "RIDGE"
+#        newButton = Button(toolbar, image=eimgnew, style="ttkstyle", command=self.newfile)
+
+#        newButton["relief"] = FLAT
+#        newButton["style"] = disabled
         newButton.image = eimgnew
         newButton.pack(side=LEFT, padx=2, pady=2)		
 		
         eimgopen = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/document-open.png')))		
+#        openButton = Button(toolbar, image=eimgopen, relief=FLAT, command=self.openfile)
         openButton = Button(toolbar, image=eimgopen, command=self.openfile)
         openButton.image = eimgopen
         openButton.pack(side=LEFT, padx=2, pady=2)		
 
         eimgsave = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/document-save.png')))		
+#        saveButton = Button(toolbar, image=eimgsave, relief=FLAT, command=self.savefile)
         saveButton = Button(toolbar, image=eimgsave, command=self.savefile)
         saveButton.image = eimgsave
         saveButton.pack(side=LEFT, padx=2, pady=2)
 		
         eimgbuild = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/run-build.png')))		
+#        buildButton = Button(toolbar, image=eimgbuild, relief=FLAT, command=self.build)
         buildButton = Button(toolbar, image=eimgbuild, command=self.build)
         buildButton.image = eimgbuild
         buildButton.pack(side=LEFT, padx=2, pady=2)		
 		
-        eimgpicker = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/input-keyboard.png')))		
+        eimgpicker = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/input-keyboard.png')))
+#        pickerButton = Button(toolbar, image=eimgpicker, relief=FLAT, command=self.showpicker)		
         pickerButton = Button(toolbar, image=eimgpicker, command=self.showpicker)
         pickerButton.image = eimgpicker
         pickerButton.pack(side=LEFT, padx=2, pady=2)			
 		
         eimgbuildandupload = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/media-flash.png')))		
+#        buildanduploadButton = Button(toolbar, image=eimgbuildandupload, relief=FLAT, command=self.fprogram)
         buildanduploadButton = Button(toolbar, image=eimgbuildandupload, command=self.fprogram)
         buildanduploadButton.image = eimgbuildandupload
         buildanduploadButton.pack(side=LEFT, padx=2, pady=2)	
@@ -332,6 +348,14 @@ class GUI(object):
 		
         # frame to hold info labels
         infoframe = Frame(self.root, borderwidth="1")
+		
+#! 74ls00
+#        eimgpicker = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/input-keyboard16.png')))
+#        pickerButton = Button(infoframe, image=eimgpicker, relief=FLAT, command=self.showpicker)
+#        pickerButton.image = eimgpicker
+#        pickerButton.pack(side=LEFT, padx=2, pady=2)
+#! 74ls00 end		
+		
         Label(infoframe, text="Hardware: ").pack(side=LEFT)
         Label(infoframe, textvariable=self.namevar).pack(side=LEFT)
         Label(infoframe, text="      Layout: ").pack(side=LEFT)
