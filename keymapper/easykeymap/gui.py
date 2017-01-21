@@ -327,14 +327,16 @@ class GUI(object):
         buildButton.image = eimgbuild
         buildButton.pack(side=LEFT, padx=2, pady=2)		
 		
-#        Separator(toolbar, orient=VERTICAL).pack(fill=X, padx=2)
+        Separator(toolbar, orient=VERTICAL).pack(side=LEFT, fill=Y)
 		
-        eimgpicker = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/input-keyboard.png')))
+        eimgpicker = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/input-keyboard16.png')))
         pickerButton = tk.Button(toolbar, image=eimgpicker, relief=FLAT, command=self.showpicker)		
 #        pickerButton = Button(toolbar, image=eimgpicker, command=self.showpicker)
         pickerButton.image = eimgpicker
-        pickerButton.pack(side=LEFT, padx=2, pady=2)			
+        pickerButton.pack(side=LEFT, padx=2, pady=2)
 		
+        Separator(toolbar, orient=VERTICAL).pack(side=LEFT, fill=Y)
+	
         eimgbuildandupload = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/media-flash.png')))
         buildanduploadButton = tk.Button(toolbar, image=eimgbuildandupload, relief=FLAT, command=self.fprogram)
 #        buildanduploadButton = Button(toolbar, image=eimgbuildandupload, command=self.fprogram)
