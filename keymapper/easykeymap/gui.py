@@ -32,6 +32,10 @@ try:
     import tkFileDialog as filedialog
     import tkSimpleDialog as simpledialog
     import tkMessageBox as messagebox
+	
+    import Tkinter as tk
+    import ttk
+	
 except ImportError:
     from tkinter import *
     from tkinter.ttk import *
@@ -39,6 +43,9 @@ except ImportError:
     from tkinter import simpledialog
     from tkinter import messagebox
 
+    import tkinter as tk
+    import tkinter.ttk as ttk
+	
 import pickle
 import copy
 from array import array
@@ -51,9 +58,7 @@ import traceback
 #! 74ls00
 from PIL import Image, ImageTk
 import subprocess
-import ttk
-#from Tkinter import Button, LEFT, TOP, X, FLAT, RAISED
-#from ttk import TButton
+
 #! 74ls00 end
 
 if not hasattr(sys, 'frozen'):
@@ -299,47 +304,40 @@ class GUI(object):
         # toolbar
         toolbar = Frame(self.root, borderwidth="1", relief=GROOVE)
 		
-        ttkstyle = ttk.Style()
-        ttkstyle.configure("TButton", relief=FLAT, background="#ccc")
-
         eimgnew = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/document-new.png')))
-#        newButton = Button(toolbar, image=eimgnew, relief=FLAT, command=self.newfile)
-
-        newButton = Button(toolbar, image=eimgnew, command=self.newfile)
-#        newButton = Button(toolbar, image=eimgnew, style="ttkstyle", command=self.newfile)
-
-#        newButton["relief"] = FLAT
-#        newButton["style"] = disabled
+        newButton = tk.Button(toolbar, image=eimgnew, relief=FLAT, command=self.newfile)
         newButton.image = eimgnew
         newButton.pack(side=LEFT, padx=2, pady=2)		
 		
-        eimgopen = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/document-open.png')))		
-#        openButton = Button(toolbar, image=eimgopen, relief=FLAT, command=self.openfile)
-        openButton = Button(toolbar, image=eimgopen, command=self.openfile)
+        eimgopen = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/document-open.png')))
+        openButton = tk.Button(toolbar, image=eimgopen, relief=FLAT, command=self.openfile)
+#        openButton = Button(toolbar, image=eimgopen, command=self.openfile)
         openButton.image = eimgopen
         openButton.pack(side=LEFT, padx=2, pady=2)		
 
-        eimgsave = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/document-save.png')))		
-#        saveButton = Button(toolbar, image=eimgsave, relief=FLAT, command=self.savefile)
-        saveButton = Button(toolbar, image=eimgsave, command=self.savefile)
+        eimgsave = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/document-save.png')))
+        saveButton = tk.Button(toolbar, image=eimgsave, relief=FLAT, command=self.savefile)
+#        saveButton = Button(toolbar, image=eimgsave, command=self.savefile)
         saveButton.image = eimgsave
         saveButton.pack(side=LEFT, padx=2, pady=2)
 		
-        eimgbuild = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/run-build.png')))		
-#        buildButton = Button(toolbar, image=eimgbuild, relief=FLAT, command=self.build)
-        buildButton = Button(toolbar, image=eimgbuild, command=self.build)
+        eimgbuild = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/run-build.png')))
+        buildButton = tk.Button(toolbar, image=eimgbuild, relief=FLAT, command=self.build)
+#        buildButton = Button(toolbar, image=eimgbuild, command=self.build)
         buildButton.image = eimgbuild
         buildButton.pack(side=LEFT, padx=2, pady=2)		
 		
+#        Separator(toolbar, orient=VERTICAL).pack(fill=X, padx=2)
+		
         eimgpicker = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/input-keyboard.png')))
-#        pickerButton = Button(toolbar, image=eimgpicker, relief=FLAT, command=self.showpicker)		
-        pickerButton = Button(toolbar, image=eimgpicker, command=self.showpicker)
+        pickerButton = tk.Button(toolbar, image=eimgpicker, relief=FLAT, command=self.showpicker)		
+#        pickerButton = Button(toolbar, image=eimgpicker, command=self.showpicker)
         pickerButton.image = eimgpicker
         pickerButton.pack(side=LEFT, padx=2, pady=2)			
 		
-        eimgbuildandupload = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/media-flash.png')))		
-#        buildanduploadButton = Button(toolbar, image=eimgbuildandupload, relief=FLAT, command=self.fprogram)
-        buildanduploadButton = Button(toolbar, image=eimgbuildandupload, command=self.fprogram)
+        eimgbuildandupload = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/media-flash.png')))
+        buildanduploadButton = tk.Button(toolbar, image=eimgbuildandupload, relief=FLAT, command=self.fprogram)
+#        buildanduploadButton = Button(toolbar, image=eimgbuildandupload, command=self.fprogram)
         buildanduploadButton.image = eimgbuildandupload
         buildanduploadButton.pack(side=LEFT, padx=2, pady=2)	
 		
@@ -351,7 +349,7 @@ class GUI(object):
 		
 #! 74ls00
 #        eimgpicker = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/input-keyboard16.png')))
-#        pickerButton = Button(infoframe, image=eimgpicker, relief=FLAT, command=self.showpicker)
+#        pickerButton = tk.Button(infoframe, image=eimgpicker, command=self.showpicker)
 #        pickerButton.image = eimgpicker
 #        pickerButton.pack(side=LEFT, padx=2, pady=2)
 #! 74ls00 end		
