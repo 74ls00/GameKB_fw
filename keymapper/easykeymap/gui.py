@@ -58,7 +58,7 @@ import traceback
 #! 74ls00
 from PIL import Image, ImageTk
 import subprocess
-
+#import debug
 #! 74ls00 end
 
 if not hasattr(sys, 'frozen'):
@@ -139,6 +139,8 @@ required_board_attributes = [
     'num_ind', 'num_bl_enab', 'led_definition', 'led_hardware', 'backlighting',
     'bl_modes', 'KMAC_key', 'keyboard_definition', 'alt_layouts'
 ]
+
+#!
 
 
 class GUI(object):
@@ -343,6 +345,14 @@ class GUI(object):
         buildanduploadButton.image = eimgbuildandupload
         buildanduploadButton.pack(side=LEFT, padx=2, pady=2)	
 		
+        eimginfoprogram = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/port.png')))
+        infoprogramButton = tk.Button(toolbar, image=eimginfoprogram, relief=FLAT, command=self.infoprogram)
+        infoprogramButton.image = eimginfoprogram
+        infoprogramButton.pack(side=LEFT, padx=2, pady=2)
+		
+        Separator(toolbar, orient=VERTICAL).pack(side=LEFT, fill=Y)
+		
+		
         toolbar.pack(side=TOP, fill=X)		
 #! 74ls00 end
 		
@@ -457,13 +467,18 @@ class GUI(object):
 
 #! 74ls00
 #   настройка програматора
-    def avrdudeconf(self):
-        subprocess.Popen('notepad.exe'+' '+self.get_pkg_path('..//..//..//avrdude//avrdude.bat'))
+#    def avrdudeconf(self):
+#        subprocess.Popen('notepad.exe'+' '+self.get_pkg_path('..//..//..//avrdude//avrdude.bat'))
 
 #   запуск програматора
     def fprogram(self):
         subprocess.Popen(self.get_pkg_path('..//..//programmer//avrdude.bat'))
-#! 74ls00 end
+		
+    def infoprogram(self):
+        subprocess.Popen('mmc devmgmt.msc')
+#        subprocess.Popen('notepad.exe'+' '+self.get_pkg_path('..//..//programmer//avrdude.bat'))
+
+		#! 74ls00 end
 		
     def showpicker(self):
         self.pickerwindow.show()

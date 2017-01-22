@@ -2,7 +2,7 @@
 title avrdude
 rem set path=%path%;%~d0%~p0
 @chcp 1251
-set avrdude=%~d0%~p0
+set avrdude=%~d0%~p0win32
 cls
 
 set port=com7

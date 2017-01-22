@@ -20,6 +20,7 @@ __all__ = [
 'atomic',
 'atreus',
 'atreus62',
+'bantam44',
 'epsilon',
 'filco',
 'filco87',

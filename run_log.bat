@@ -1,4 +1,7 @@
-@set path=%path%;C:\Python27;%~d0%~p0Python2P\App\Lib\site-packages\PIL%path%
+@set path=%path%;C:\Python27
+rem ;%~d0%~p0Python2P\App\Lib\site-packages\PIL%path%
+
+chcp 1251
 
 cd keymapper
 python -m easykeymap.gui
