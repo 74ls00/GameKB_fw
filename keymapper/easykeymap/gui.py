@@ -58,8 +58,20 @@ import traceback
 #! 74ls00
 from PIL import Image, ImageTk
 import subprocess
+import platform
+
 #import debug
 #! 74ls00 end
+
+if os.environ['PROCESSOR_ARCHITEW6432'] and platform.architecture()[0] == "32bit":
+    sys.stdout.write('WOW64')
+elif platform.architecture()[0] == "64bit":
+    sys.stdout.write('AMD64')
+else: 
+    sys.stdout.write('x86')
+
+
+
 
 if not hasattr(sys, 'frozen'):
     import pkg_resources
@@ -313,19 +325,16 @@ class GUI(object):
 		
         eimgopen = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/document-open.png')))
         openButton = tk.Button(toolbar, image=eimgopen, relief=FLAT, command=self.openfile)
-#        openButton = Button(toolbar, image=eimgopen, command=self.openfile)
         openButton.image = eimgopen
         openButton.pack(side=LEFT, padx=2, pady=2)		
 
         eimgsave = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/document-save.png')))
         saveButton = tk.Button(toolbar, image=eimgsave, relief=FLAT, command=self.savefile)
-#        saveButton = Button(toolbar, image=eimgsave, command=self.savefile)
         saveButton.image = eimgsave
         saveButton.pack(side=LEFT, padx=2, pady=2)
 		
         eimgbuild = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/run-build.png')))
         buildButton = tk.Button(toolbar, image=eimgbuild, relief=FLAT, command=self.build)
-#        buildButton = Button(toolbar, image=eimgbuild, command=self.build)
         buildButton.image = eimgbuild
         buildButton.pack(side=LEFT, padx=2, pady=2)		
 		
@@ -333,7 +342,6 @@ class GUI(object):
 		
         eimgpicker = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/input-keyboard16.png')))
         pickerButton = tk.Button(toolbar, image=eimgpicker, relief=FLAT, command=self.showpicker)		
-#        pickerButton = Button(toolbar, image=eimgpicker, command=self.showpicker)
         pickerButton.image = eimgpicker
         pickerButton.pack(side=LEFT, padx=2, pady=2)
 		
@@ -341,7 +349,6 @@ class GUI(object):
 	
         eimgbuildandupload = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/media-flash.png')))
         buildanduploadButton = tk.Button(toolbar, image=eimgbuildandupload, relief=FLAT, command=self.fprogram)
-#        buildanduploadButton = Button(toolbar, image=eimgbuildandupload, command=self.fprogram)
         buildanduploadButton.image = eimgbuildandupload
         buildanduploadButton.pack(side=LEFT, padx=2, pady=2)	
 		
