@@ -57,19 +57,20 @@ import traceback
 
 #! 74ls00
 from PIL import Image, ImageTk
+#import shlex #for linux
 import subprocess
 import platform
 
 #import debug
+
+
+#if os.environ['PROCESSOR_ARCHITEW6432'] and platform.architecture()[0] == "32bit":
+#    sys.stdout.write('WOW64')
+#elif platform.architecture()[0] == "64bit":
+#    sys.stdout.write('AMD64')
+#else: 
+#    sys.stdout.write('x86')
 #! 74ls00 end
-
-if os.environ['PROCESSOR_ARCHITEW6432'] and platform.architecture()[0] == "32bit":
-    sys.stdout.write('WOW64')
-elif platform.architecture()[0] == "64bit":
-    sys.stdout.write('AMD64')
-else: 
-    sys.stdout.write('x86')
-
 
 
 
@@ -479,12 +480,16 @@ class GUI(object):
 
 #   запуск програматора
     def fprogram(self):
+#for win
         subprocess.Popen(self.get_pkg_path('..//..//programmer//avrdude.bat'))
+#for linux
+#        subprocess.Popen(shlex.split('/usr/bin/mate-terminal --title avrdude -e '+self.get_pkg_path('..//..//programmer//linux//avrdude.sh')))		
 		
     def infoprogram(self):
         subprocess.Popen('mmc devmgmt.msc')
 #        subprocess.Popen('notepad.exe'+' '+self.get_pkg_path('..//..//programmer//avrdude.bat'))
-
+#for linux
+#        subprocess.Popen(shlex.split('/usr/bin/mate-terminal --title port -e '+self.get_pkg_path('..//..//programmer//linux//port.sh')))
 		#! 74ls00 end
 		
     def showpicker(self):
