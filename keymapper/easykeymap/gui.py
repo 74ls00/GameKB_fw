@@ -344,18 +344,13 @@ class GUI(object):
         pickerButton.pack(side=LEFT, padx=2, pady=2)
 		
         Separator(toolbar, orient=VERTICAL).pack(side=LEFT, fill=Y)
-	
+
         eimgbuildandupload = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/media-flash.png')))
-        buildanduploadButton = tk.Button(toolbar, image=eimgbuildandupload, relief=FLAT, command=self.fprogram)
+        buildanduploadButton = tk.Button(toolbar, image=eimgbuildandupload, relief=FLAT, command=self.buildandupload)		
         buildanduploadButton.image = eimgbuildandupload
-        buildanduploadButton.pack(side=LEFT, padx=2, pady=2)	
+        buildanduploadButton.pack(side=LEFT, padx=2, pady=2)
 		
-        eimginfoprogram = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/port.png')))
-        infoprogramButton = tk.Button(toolbar, image=eimginfoprogram, relief=FLAT, command=self.infoprogram)
-        infoprogramButton.image = eimginfoprogram
-        infoprogramButton.pack(side=LEFT, padx=2, pady=2)
-		
-        Separator(toolbar, orient=VERTICAL).pack(side=LEFT, fill=Y)
+        Separator(toolbar, orient=VERTICAL).pack(side=LEFT, fill=Y)		
 		
         toolbar.pack(side=TOP, fill=X)		
 #! 74ls00 end
@@ -466,32 +461,6 @@ class GUI(object):
         # set up some styles
         style = Style()
         style.configure("Gold.TButton", background="Gold")
-
-#! 74ls00
-#   настройка програматора
-#    def avrdudeconf(self):
-#        subprocess.Popen('notepad.exe'+' '+self.get_pkg_path('..//..//..//avrdude//avrdude.bat'))
-
-#   запуск програматора
-    def fprogram(self):
-        if sys.platform == 'win32':
-            subprocess.Popen(self.get_pkg_path('..//..//programmer//avrdude.bat'))
-        elif sys.platform == 'linux' or 'linux2':
-            subprocess.Popen(shlex.split('/usr/bin/mate-terminal --title avrdude -e '+self.get_pkg_path('..//..//programmer//linux//avrdude.sh')))
-        else:
-            return
-			
-#   просмотр порта			
-    def infoprogram(self):
-        if sys.platform == 'win32':
-            subprocess.Popen('mmc devmgmt.msc')
-        elif sys.platform == 'linux' or 'linux2':
-            subprocess.Popen(shlex.split('/usr/bin/mate-terminal --title port -e '+self.get_pkg_path('..//..//programmer//linux//port.sh')))
-        else:
-            return
-		
-#        subprocess.Popen('notepad.exe'+' '+self.get_pkg_path('..//..//programmer//avrdude.bat'))
-#! 74ls00 end
 		
     def showpicker(self):
         self.pickerwindow.show()
