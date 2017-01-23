@@ -57,7 +57,7 @@ import traceback
 
 #! 74ls00
 from PIL import Image, ImageTk
-#import shlex #for linux
+import shlex #for linux
 import subprocess
 import platform
 
@@ -482,12 +482,14 @@ class GUI(object):
     def fprogram(self):
 #for win
         subprocess.Popen(self.get_pkg_path('..//..//programmer//avrdude.bat'))
+		
 #for linux
-#        subprocess.Popen(shlex.split('/usr/bin/mate-terminal --title avrdude -e '+self.get_pkg_path('..//..//programmer//linux//avrdude.sh')))		
+#         subprocess.Popen(shlex.split('/usr/bin/mate-terminal --title avrdude -e '+self.get_pkg_path('..//..//programmer//linux//avrdude.sh')))
 		
     def infoprogram(self):
         subprocess.Popen('mmc devmgmt.msc')
 #        subprocess.Popen('notepad.exe'+' '+self.get_pkg_path('..//..//programmer//avrdude.bat'))
+
 #for linux
 #        subprocess.Popen(shlex.split('/usr/bin/mate-terminal --title port -e '+self.get_pkg_path('..//..//programmer//linux//port.sh')))
 		#! 74ls00 end
