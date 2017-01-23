@@ -1,6 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-#
 # Easy AVR USB Keyboard Firmware Keymapper
 # Copyright (C) 2013-2016 David Howland
 #
@@ -32,10 +29,6 @@ try:
     import tkFileDialog as filedialog
     import tkSimpleDialog as simpledialog
     import tkMessageBox as messagebox
-	
-    import Tkinter as tk
-    import ttk
-	
 except ImportError:
     from tkinter import *
     from tkinter.ttk import *
@@ -43,9 +36,6 @@ except ImportError:
     from tkinter import simpledialog
     from tkinter import messagebox
 
-    import tkinter as tk
-    import tkinter.ttk as ttk
-	
 import pickle
 import copy
 from array import array
@@ -54,22 +44,6 @@ import os.path
 import importlib
 from glob import glob
 import traceback
-
-#! 74ls00
-from PIL import Image, ImageTk
-import shlex #for linux https://docs.python.org/2/library/subprocess.html
-import subprocess
-import platform
-
-#if os.environ['PROCESSOR_ARCHITEW6432'] and platform.architecture()[0] == "32bit":
-#    sys.stdout.write('WOW64')
-#elif platform.architecture()[0] == "64bit":
-#    sys.stdout.write('AMD64')
-#else: 
-#    sys.stdout.write('x86')
-#! 74ls00 end
-
-
 
 if not hasattr(sys, 'frozen'):
     import pkg_resources
@@ -149,8 +123,6 @@ required_board_attributes = [
     'num_ind', 'num_bl_enab', 'led_definition', 'led_hardware', 'backlighting',
     'bl_modes', 'KMAC_key', 'keyboard_definition', 'alt_layouts'
 ]
-
-#!
 
 
 class GUI(object):
@@ -311,65 +283,8 @@ class GUI(object):
                               command=self.about)
         menubar.add_cascade(menu=menu_help, label='Help')
         self.root['menu'] = menubar
-		
-#! 74ls00
-        # toolbar
-        toolbar = Frame(self.root, borderwidth="1", relief=GROOVE)
-		
-        eimgnew = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/document-new.png')))
-        newButton = tk.Button(toolbar, image=eimgnew, relief=FLAT, command=self.newfile)
-        newButton.image = eimgnew
-        newButton.pack(side=LEFT, padx=2, pady=2)		
-		
-        eimgopen = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/document-open.png')))
-        openButton = tk.Button(toolbar, image=eimgopen, relief=FLAT, command=self.openfile)
-        openButton.image = eimgopen
-        openButton.pack(side=LEFT, padx=2, pady=2)		
-
-        eimgsave = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/document-save.png')))
-        saveButton = tk.Button(toolbar, image=eimgsave, relief=FLAT, command=self.savefile)
-        saveButton.image = eimgsave
-        saveButton.pack(side=LEFT, padx=2, pady=2)
-		
-        eimgbuild = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/run-build.png')))
-        buildButton = tk.Button(toolbar, image=eimgbuild, relief=FLAT, command=self.build)
-        buildButton.image = eimgbuild
-        buildButton.pack(side=LEFT, padx=2, pady=2)		
-		
-        Separator(toolbar, orient=VERTICAL).pack(side=LEFT, fill=Y)
-		
-        eimgpicker = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/input-keyboard16.png')))
-        pickerButton = tk.Button(toolbar, image=eimgpicker, relief=FLAT, command=self.showpicker)		
-        pickerButton.image = eimgpicker
-        pickerButton.pack(side=LEFT, padx=2, pady=2)
-		
-        Separator(toolbar, orient=VERTICAL).pack(side=LEFT, fill=Y)
-	
-        eimgbuildandupload = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/media-flash.png')))
-        buildanduploadButton = tk.Button(toolbar, image=eimgbuildandupload, relief=FLAT, command=self.fprogram)
-        buildanduploadButton.image = eimgbuildandupload
-        buildanduploadButton.pack(side=LEFT, padx=2, pady=2)	
-		
-        eimginfoprogram = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/port.png')))
-        infoprogramButton = tk.Button(toolbar, image=eimginfoprogram, relief=FLAT, command=self.infoprogram)
-        infoprogramButton.image = eimginfoprogram
-        infoprogramButton.pack(side=LEFT, padx=2, pady=2)
-		
-        Separator(toolbar, orient=VERTICAL).pack(side=LEFT, fill=Y)
-		
-        toolbar.pack(side=TOP, fill=X)		
-#! 74ls00 end
-		
         # frame to hold info labels
-        infoframe = Frame(self.root, borderwidth="1")
-		
-#! 74ls00
-#        eimgpicker = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/input-keyboard16.png')))
-#        pickerButton = tk.Button(infoframe, image=eimgpicker, command=self.showpicker)
-#        pickerButton.image = eimgpicker
-#        pickerButton.pack(side=LEFT, padx=2, pady=2)
-#! 74ls00 end		
-		
+        infoframe = Frame(self.root)
         Label(infoframe, text="Hardware: ").pack(side=LEFT)
         Label(infoframe, textvariable=self.namevar).pack(side=LEFT)
         Label(infoframe, text="      Layout: ").pack(side=LEFT)
@@ -388,14 +303,12 @@ class GUI(object):
               width=2).pack(side=LEFT)
         infoframe.pack()
         Separator(self.root, orient=HORIZONTAL).pack(fill=X, pady=2)
-		
         # frame to hold the editing controls
         modframe = Frame(self.root)
         Label(modframe, text="Set: ").pack(side=LEFT)
         temp = sorted(scancodes.keys())
         temp2 = [x for x in temp if not x.startswith("SCANCODE_")]
-        setbox = Combobox(modframe, width=40, height=30)
-#!       setbox = Combobox(modframe, width=40, height=40)
+        setbox = Combobox(modframe, width=40, height=40)
         setbox['values'] = temp
         setbox['textvariable'] = self.bindvar
         setbox.state(['readonly'])
@@ -452,8 +365,7 @@ class GUI(object):
         macrosubframe = Frame(macroframe)
         macrosubframe.rowconfigure(0, weight=1)
         macrosubframe.columnconfigure(0, weight=1)
-        self.macrotext = Text(macrosubframe, height=5,  font = (10))
-#!      self.macrotext = Text(macrosubframe, height=5)
+        self.macrotext = Text(macrosubframe, height=5)
         self.macrotext.bind('<<Modified>>', self.macrochange)
         self.macrotext.grid(row=0, column=0, sticky=(N, W, E, S))
         scroll = Scrollbar(macrosubframe, orient=VERTICAL,
@@ -467,32 +379,6 @@ class GUI(object):
         style = Style()
         style.configure("Gold.TButton", background="Gold")
 
-#! 74ls00
-#   настройка програматора
-#    def avrdudeconf(self):
-#        subprocess.Popen('notepad.exe'+' '+self.get_pkg_path('..//..//..//avrdude//avrdude.bat'))
-
-#   запуск програматора
-    def fprogram(self):
-        if sys.platform == 'win32':
-            subprocess.Popen(self.get_pkg_path('..//..//programmer//avrdude.bat'))
-        elif sys.platform == 'linux' or 'linux2':
-            subprocess.Popen(shlex.split('/usr/bin/mate-terminal --title avrdude -e '+self.get_pkg_path('..//..//programmer//linux//avrdude.sh')))
-        else:
-            return
-			
-#   просмотр порта			
-    def infoprogram(self):
-        if sys.platform == 'win32':
-            subprocess.Popen('mmc devmgmt.msc')
-        elif sys.platform == 'linux' or 'linux2':
-            subprocess.Popen(shlex.split('/usr/bin/mate-terminal --title port -e '+self.get_pkg_path('..//..//programmer//linux//port.sh')))
-        else:
-            return
-		
-#        subprocess.Popen('notepad.exe'+' '+self.get_pkg_path('..//..//programmer//avrdude.bat'))
-#! 74ls00 end
-		
     def showpicker(self):
         self.pickerwindow.show()
 
@@ -1214,7 +1100,7 @@ class GUI(object):
                     parent=self.root)
                 if not answer:
                     return
-            defaultFilename = 'Untitled_FW.hex'
+            defaultFilename = 'Untitled.hex'
             if self.filename != None:
                 defaultFilename = os.path.splitext(os.path.basename(self.filename))[0] + '.hex'
             filename = filedialog.asksaveasfilename(
@@ -1780,8 +1666,7 @@ class TextWindow(simpledialog.Dialog):
     def body(self, master):
         master.rowconfigure(0, weight=1)
         master.columnconfigure(0, weight=1)
-        self.text = Text(master, height=30, width=80, wrap='none', font = (10))
-#!      self.text = Text(master, height=40, width=80, wrap='none')
+        self.text = Text(master, height=40, width=80, wrap='none')
         self.text.grid(row=0, column=0, sticky=(N, E, W, S))
         scroll = Scrollbar(master, orient=VERTICAL, command=self.text.yview)
         scroll.grid(row=0, column=1, sticky=(N, S))
