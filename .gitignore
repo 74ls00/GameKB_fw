@@ -37,6 +37,7 @@ NewLay3.dat
 mykb.dat
 mykb.hex
 
+gui2.py
 ~programming.py
 
 #firmware\EasyAVR\keymapper
@@ -57,8 +58,9 @@ toolbar32
 
 
 #firmware\EasyAVR\keymapper\easykeymap
-#PIL
+PIL
 #PIL.pth
+~PIL
 
 
 Model
@@ -66,6 +68,11 @@ key-size.ods
 
 
 PortablePython2.7.6.1
+Python2P
+~Python2P
+-App
+
+
 run_log _d.bat
 Autoit
 
@@ -78,6 +85,8 @@ leonardo
 
 Новый текстовый документ.txt
 
+
+easykeymapPortable2.bat
 
 
 *.7z

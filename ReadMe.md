@@ -1,5 +1,5 @@
 
-Панель toolbar требует PIL .
+РџР°РЅРµР»СЊ toolbar С‚СЂРµР±СѓРµС‚ PIL .
 
 Linux.
 
@@ -9,7 +9,7 @@ sudo apt-get install libjpeg62-dev zlib1g-dev libfreetype6-dev liblcms1-dev pyth
 
 pip install pillow
 
-Возможно потребуется
+Р’РѕР·РјРѕР¶РЅРѕ РїРѕС‚СЂРµР±СѓРµС‚СЃСЏ
 
 sudo apt-get install python-setuptools
 
