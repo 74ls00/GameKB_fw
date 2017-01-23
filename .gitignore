@@ -1,46 +1,41 @@
 git.txt
 desktop.ini
 
-
-3d
 backup/
 local/
 old/
-wiki/
-GameKB.wiki
-GameKB
-~GameKB
-
 gits
+Python3Portable
 
-run_log_port.bat
-run_nolog_port.bat
+.idea
+~bad
+~std
+Новый текстовый документ.txt
+easykeymapPortable2.bat
+
+#programmer
+boot
+~boot
+dfu-programmer
+dfu-programmer-win-0.7.2
+
+
+#keymapper
 1.hex
 111.hex
 111.dat
 
-
-#firmware
-tmk_keyboard.7z
-GameKB_tmk
-boot
-~boot
-run-port.bat
-AvrUSB500_by_Petka_HEX_SRC_v8_uni
-hex2bin.exe
-b.bat
-dfu-programmer
-dfu-programmer-win-0.7.2
-PortablePythonFull
-NewLay3.hex
-NewLay3.dat
 mykb.dat
 mykb.hex
+
+#keymapper/easykeymap
+
+PIL
+~PIL
 
 gui2.py
 ~programming.py
 
-#firmware\EasyAVR\keymapper
 1.bin
 def.hex
 tmp.hex
@@ -51,49 +46,21 @@ easykeymap.egg-info
 
 mint.txt
 
+##keymapper/easykeymap/icons
+
 toolbar22
 ~toolbar22
 toolbar32
 ~toolbar32
-
-
-#firmware\EasyAVR\keymapper\easykeymap
-PIL
-#PIL.pth
-~PIL
-
-
-Model
-key-size.ods
-
 
 PortablePython2.7.6.1
 Python2P
 ~Python2P
 -App
 
-
-run_log _d.bat
-Autoit
-
-leonardo
-
-.idea
-
-~bad
-~std
-
-Новый текстовый документ.txt
-
-
-easykeymapPortable2.bat
-
-
 *.7z
-
 *.gpi
 *.xln
-
 *.bak
 *.lnk
 *.log
