@@ -476,7 +476,7 @@ class GUI(object):
     def fprogram(self):
         if sys.platform == 'win32':
             subprocess.Popen(self.get_pkg_path('..//..//programmer//avrdude.bat'))
-        elif sys.platform == 'linux':
+        elif sys.platform == 'linux' or 'linux2':
             subprocess.Popen(shlex.split('/usr/bin/mate-terminal --title avrdude -e '+self.get_pkg_path('..//..//programmer//linux//avrdude.sh')))
         else:
             return
@@ -485,7 +485,7 @@ class GUI(object):
     def infoprogram(self):
         if sys.platform == 'win32':
             subprocess.Popen('mmc devmgmt.msc')
-        elif sys.platform == 'linux':
+        elif sys.platform == 'linux' or 'linux2':
             subprocess.Popen(shlex.split('/usr/bin/mate-terminal --title port -e '+self.get_pkg_path('..//..//programmer//linux//port.sh')))
         else:
             return
