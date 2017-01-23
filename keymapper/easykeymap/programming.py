@@ -289,31 +289,52 @@ class ProgrammingWindow(simpledialog.Dialog):
         self.resizable(0, 0)
         self.taskvar = StringVar()
         Label(master, text="Board:  ").grid(column=0, row=0, sticky=(E))
-        Label(master, text=self.info.description).grid(column=1, row=0, columnspan=3, sticky=(E,W))
+#        Label(master, text=self.info.description).grid(column=1, row=0, sticky=(E,W))#3
+        Label(master, text=self.info.description).grid(column=1, row=0, columnspan=8, sticky=(E,W))
 		
         Label(master, text="File:  ").grid(column=0, row=1, sticky=(E))
-        Label(master, text=self.info.filename).grid(column=1, row=1, columnspan=3, sticky=(E,W))
+#        Label(master, text=self.info.filename).grid(column=1, row=1, sticky=(E,W))#3
+        Label(master, text=self.info.filename).grid(column=1, row=1, columnspan=8, sticky=(E,W))
 		
         Label(master, text="Task:  ").grid(column=0, row=2, sticky=(E))
         self.combo = Combobox(master, textvariable=self.taskvar, state='readonly')
         self.combo['values'] = [t.description for t in self.tasks]
         self.combo.bind('<<ComboboxSelected>>', self.taskselect)
-        self.combo.grid(column=1, row=2, sticky=(E,W))
+        self.combo.grid(column=1, row=2, columnspan=7, sticky=(E,W))
         self.button = Button(master, text="Run", command=self.run)
         self.button.state(['disabled'])
-        self.button.grid(column=2, row=2, columnspan=2, sticky=(W))
+        self.button.grid(column=2, row=2, columnspan=7, sticky=(E))
 #!		
-        Label(master, text="Setup:  ").grid(column=0, row=3, sticky=(E))
+#        Label(master, text="Set:").grid(column=0, row=3, sticky=(W))
+		
+	
+		
+        Label(master, text="Port:").grid(column=1, row=3, sticky=(W))
+		
+        self.comboPort = Combobox(master, textvariable=self.taskvar, state='readonly')
+        self.comboPort.grid(column=2, row=3, sticky=(E,W))
+		
+        Label(master, text="Programmer:").grid(column=3, row=3, sticky=(W))		
+		
+        self.comboProgrammer = Combobox(master, textvariable=self.taskvar, state='readonly')
+        self.comboProgrammer.grid(column=4, row=3, sticky=(E,W))
+		
+        Label(master, text="Param:").grid(column=5, row=3, sticky=(W))		
+		
+        self.comboParam = Combobox(master, textvariable=self.taskvar, state='readonly')
+        self.comboParam.grid(column=6, row=3, sticky=(E,W))
 		
         eimginfoprogram = ImageTk.PhotoImage(Image.open(get_pkg_path('icons/toolbar/port.png')))
-        self.infoProgramButton = tk.Button(master, text="port",  image=eimginfoprogram, relief=FLAT, command=self.infoprogram)
-        self.infoProgramButton.grid(column=1, row=3, sticky=(W))
+        self.infoProgramButton = tk.Button(master, image=eimginfoprogram, relief=FLAT, command=self.infoprogram)
+        self.infoProgramButton.grid(column=7, row=3, sticky=(W))
         self.infoProgramButton.image = eimginfoprogram
 		
         eimgbuildandupload = ImageTk.PhotoImage(Image.open(get_pkg_path('icons/toolbar/media-flash.png')))
-        self.buildanduploadButton = tk.Button(master, text="forse prog",  image=eimgbuildandupload, relief=FLAT, command=self.fprogram)
-        self.buildanduploadButton.grid(column=2, row=3, sticky=(W))
-        self.buildanduploadButton.image = eimgbuildandupload		
+        self.buildanduploadButton = tk.Button(master, image=eimgbuildandupload, relief=FLAT, command=self.fprogram)
+        self.buildanduploadButton.grid(column=8, row=3, sticky=(W))
+        self.buildanduploadButton.image = eimgbuildandupload	
+		
+		
 		
         master.columnconfigure(1, weight=1)
         
@@ -322,9 +343,11 @@ class ProgrammingWindow(simpledialog.Dialog):
             self.taskselect(None)
         
         self.text = Text(master, width=90, height=20, wrap=WORD)
-        self.text.grid(column=0, row=4, columnspan=3, sticky=(N, W, E, S))
+        self.text.grid(column=0, row=4, columnspan=9, sticky=(N, W, E, S))
+#        self.text.grid(column=0, row=4, columnspan=3, sticky=(N, W, E, S))
+
         self.scroll = Scrollbar(master, orient=VERTICAL, command=self.text.yview)
-        self.scroll.grid(column=3, row=4, sticky=(N, W, E, S))
+        self.scroll.grid(column=9, row=4, sticky=(N, W, E, S))
         self.text["yscrollcommand"] = self.scroll.set
         
         self.bodyframe = master

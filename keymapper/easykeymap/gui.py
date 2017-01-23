@@ -57,9 +57,9 @@ import traceback
 
 #! 74ls00
 from PIL import Image, ImageTk
-import shlex #for linux https://docs.python.org/2/library/subprocess.html
-import subprocess
-import platform
+#import shlex #for linux https://docs.python.org/2/library/subprocess.html
+#import subprocess
+#import platform
 
 #if os.environ['PROCESSOR_ARCHITEW6432'] and platform.architecture()[0] == "32bit":
 #    sys.stdout.write('WOW64')
