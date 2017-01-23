@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+#
 # Easy AVR USB Keyboard Firmware Keymapper
 # Copyright (C) 2013-2016 David Howland
 #
@@ -50,8 +53,13 @@ except ImportError:
     import tkinter.ttk as ttk
 	
 from PIL import Image, ImageTk
+import shlex #for linux https://docs.python.org/2/library/subprocess.html
+import platform
+
+#portvar = StringVar()
 
 def popup(root, filename, config):
+
     info = ProgrammingInfo()
     info.filename = os.path.normpath(filename)
     info.binformat = filename.endswith('bin')
@@ -270,10 +278,10 @@ class ProgrammingWindow(simpledialog.Dialog):
     def collecttasks(self):
         # in the future this should be automatically scanned from a directory
         self.tasks = [
+            AvrdudePosix,	
             TeensyLoader,
             FlipWindows,
-            DfuProgrammer,
-            AvrdudePosix
+            DfuProgrammer
         ]
         # the first matching task will be pre-selected for the user
         self.besttask = None
@@ -288,6 +296,7 @@ class ProgrammingWindow(simpledialog.Dialog):
     def body(self, master):
         self.resizable(0, 0)
         self.taskvar = StringVar()
+		
         Label(master, text="Board:  ").grid(column=0, row=0, sticky=(E))
 #        Label(master, text=self.info.description).grid(column=1, row=0, sticky=(E,W))#3
         Label(master, text=self.info.description).grid(column=1, row=0, columnspan=8, sticky=(E,W))
@@ -300,41 +309,41 @@ class ProgrammingWindow(simpledialog.Dialog):
         self.combo = Combobox(master, textvariable=self.taskvar, state='readonly')
         self.combo['values'] = [t.description for t in self.tasks]
         self.combo.bind('<<ComboboxSelected>>', self.taskselect)
-        self.combo.grid(column=1, row=2, columnspan=7, sticky=(E,W))
+        self.combo.grid(column=1, row=2, columnspan=4, sticky=(E,W))
         self.button = Button(master, text="Run", command=self.run)
         self.button.state(['disabled'])
         self.button.grid(column=2, row=2, columnspan=7, sticky=(E))
 #!		
-#        Label(master, text="Set:").grid(column=0, row=3, sticky=(W))
+ #       portvartx = self.portvar.get()
+        self.portvar = StringVar()
+        Label(master, text="Port:  ").grid(column=0, row=3, sticky=(E))
+        self.entryPort = Entry(master, textvariable=self.portvar)
+        self.entryPort.grid(column=1, row=3, sticky=(E,W))		
 		
-	
+#        self.comboPort = Entry(master, textvariable=self.taskvar)
+ #       self.logger(self.comboPort)
+
 		
-        Label(master, text="Port:").grid(column=1, row=3, sticky=(W))
-		
-        self.comboPort = Combobox(master, textvariable=self.taskvar, state='readonly')
-        self.comboPort.grid(column=2, row=3, sticky=(E,W))
-		
-        Label(master, text="Programmer:").grid(column=3, row=3, sticky=(W))		
-		
+        Label(master, text="  Programmer:  ").grid(column=2, row=3, sticky=(W))		
         self.comboProgrammer = Combobox(master, textvariable=self.taskvar, state='readonly')
-        self.comboProgrammer.grid(column=4, row=3, sticky=(E,W))
+        self.comboProgrammer.grid(column=3, row=3, sticky=(E,W))
 		
-        Label(master, text="Param:").grid(column=5, row=3, sticky=(W))		
-		
+        Label(master, text="  Param:  ").grid(column=4, row=3, sticky=(W))		
         self.comboParam = Combobox(master, textvariable=self.taskvar, state='readonly')
-        self.comboParam.grid(column=6, row=3, sticky=(E,W))
+        self.comboParam.grid(column=5, row=3, sticky=(E,W))
 		
         eimginfoprogram = ImageTk.PhotoImage(Image.open(get_pkg_path('icons/toolbar/port.png')))
         self.infoProgramButton = tk.Button(master, image=eimginfoprogram, relief=FLAT, command=self.infoprogram)
-        self.infoProgramButton.grid(column=7, row=3, sticky=(W))
+        self.infoProgramButton.grid(column=6, row=3, sticky=(W))
         self.infoProgramButton.image = eimginfoprogram
 		
         eimgbuildandupload = ImageTk.PhotoImage(Image.open(get_pkg_path('icons/toolbar/media-flash.png')))
         self.buildanduploadButton = tk.Button(master, image=eimgbuildandupload, relief=FLAT, command=self.fprogram)
-        self.buildanduploadButton.grid(column=8, row=3, sticky=(W))
+        self.buildanduploadButton.grid(column=7, row=3, sticky=(W))
         self.buildanduploadButton.image = eimgbuildandupload	
 		
-		
+
+
 		
         master.columnconfigure(1, weight=1)
         
