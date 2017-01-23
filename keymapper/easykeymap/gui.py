@@ -476,16 +476,20 @@ class GUI(object):
     def fprogram(self):
         if sys.platform == 'win32':
             subprocess.Popen(self.get_pkg_path('..//..//programmer//avrdude.bat'))
-        else:
+        elif sys.platform == 'linux':
             subprocess.Popen(shlex.split('/usr/bin/mate-terminal --title avrdude -e '+self.get_pkg_path('..//..//programmer//linux//avrdude.sh')))
-
+        else:
+            return
+			
 #   просмотр порта			
     def infoprogram(self):
         if sys.platform == 'win32':
             subprocess.Popen('mmc devmgmt.msc')
-        else:
+        elif sys.platform == 'linux':
             subprocess.Popen(shlex.split('/usr/bin/mate-terminal --title port -e '+self.get_pkg_path('..//..//programmer//linux//port.sh')))
-
+        else:
+            return
+		
 #        subprocess.Popen('notepad.exe'+' '+self.get_pkg_path('..//..//programmer//avrdude.bat'))
 #! 74ls00 end
 		

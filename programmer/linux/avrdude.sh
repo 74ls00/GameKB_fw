@@ -13,7 +13,7 @@ echo "FW :" $pdir/
 echo $fw
 
 avrdude -P $port -c stk500v2 -p m32u4 -U flash:w:$pdir/$fw:a
-echo $pdir/$fw
+
 sleep 5s
 
 
