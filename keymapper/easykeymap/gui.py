@@ -57,12 +57,9 @@ import traceback
 
 #! 74ls00
 from PIL import Image, ImageTk
-import shlex #for linux
+import shlex #for linux https://docs.python.org/2/library/subprocess.html
 import subprocess
 import platform
-
-#import debug
-
 
 #if os.environ['PROCESSOR_ARCHITEW6432'] and platform.architecture()[0] == "32bit":
 #    sys.stdout.write('WOW64')
@@ -360,7 +357,6 @@ class GUI(object):
 		
         Separator(toolbar, orient=VERTICAL).pack(side=LEFT, fill=Y)
 		
-		
         toolbar.pack(side=TOP, fill=X)		
 #! 74ls00 end
 		
@@ -470,8 +466,6 @@ class GUI(object):
         # set up some styles
         style = Style()
         style.configure("Gold.TButton", background="Gold")
-		
-		
 
 #! 74ls00
 #   настройка програматора
@@ -480,19 +474,20 @@ class GUI(object):
 
 #   запуск програматора
     def fprogram(self):
-#for win
-        subprocess.Popen(self.get_pkg_path('..//..//programmer//avrdude.bat'))
-		
-#for linux
-#         subprocess.Popen(shlex.split('/usr/bin/mate-terminal --title avrdude -e '+self.get_pkg_path('..//..//programmer//linux//avrdude.sh')))
-		
-    def infoprogram(self):
-        subprocess.Popen('mmc devmgmt.msc')
-#        subprocess.Popen('notepad.exe'+' '+self.get_pkg_path('..//..//programmer//avrdude.bat'))
+        if sys.platform == 'win32':
+            subprocess.Popen(self.get_pkg_path('..//..//programmer//avrdude.bat'))
+        else:
+            subprocess.Popen(shlex.split('/usr/bin/mate-terminal --title avrdude -e '+self.get_pkg_path('..//..//programmer//linux//avrdude.sh')))
 
-#for linux
-#        subprocess.Popen(shlex.split('/usr/bin/mate-terminal --title port -e '+self.get_pkg_path('..//..//programmer//linux//port.sh')))
-		#! 74ls00 end
+#   просмотр порта			
+    def infoprogram(self):
+        if sys.platform == 'win32':
+            subprocess.Popen('mmc devmgmt.msc')
+        else:
+            subprocess.Popen(shlex.split('/usr/bin/mate-terminal --title port -e '+self.get_pkg_path('..//..//programmer//linux//port.sh')))
+
+#        subprocess.Popen('notepad.exe'+' '+self.get_pkg_path('..//..//programmer//avrdude.bat'))
+#! 74ls00 end
 		
     def showpicker(self):
         self.pickerwindow.show()
