@@ -1,104 +1,3 @@
-git.txt
-desktop.ini
-
-backup/
-local/
-old/
-gits
-Python3Portable
-
-.idea
-~bad
-~std
-Новый текстовый документ.txt
-~Новый текстовый документ.txt
-easykeymapPortable2.bat
-
-#programmer
-boot
-~boot
-dfu-programmer
-dfu-programmer-win-0.7.2
-
-
-#keymapper
-1.hex
-111.hex
-111.dat
-
-mykb.dat
-mykb.hex
-
-#keymapper/easykeymap
-
-PIL
-~PIL
-
-gui2.py
-~programming.py
-
-1.bin
-def.hex
-tmp.hex
-NumPad_lay.dat
-NewLay2.dat
-NewLay3.dat
-easykeymap.egg-info
-
-mint.txt
-
-##keymapper/easykeymap/icons
-
-toolbar22
-~toolbar22
-toolbar32
-~toolbar32
-
-PortablePython2.7.6.1
-Python2P
-~Python2P
--App
-
-*.7z
-*.gpi
-*.xln
-*.bak
-*.lnk
-*.log
-*.b##
-*.b#1
-*.b#2
-*.b#3
-*.b#4
-*.b#5
-*.b#6
-*.b#7
-*.b#8
-*.b#9
-*.s##
-*.s#1
-*.s#2
-*.s#3
-*.s#4
-*.s#5
-*.s#6
-*.s#7
-*.s#8
-*.s#9
-*.l#1
-*.l#2
-*.l#3
-*.l#4
-*.l#5
-*.l#6
-*.l#7
-*.l#8
-*.l#9
-*.mpd
-*.pro
-*.job
-
-
 # Object files
 *.o
 *.ko
@@ -116,13 +15,13 @@ Python2P
 *.lo
 
 # Shared objects (inc. Windows DLLs)
-#*.dll
+*.dll
 *.so
 *.so.*
 *.dylib
 
 # Executables
-#*.exe
+*.exe
 *.out
 *.app
 *.i*86
@@ -149,7 +48,7 @@ dist_exe/
 downloads/
 eggs/
 .eggs/
-#lib/
+lib/
 lib64/
 parts/
 sdist/
@@ -157,6 +56,7 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+keymapper/easykeymap_windows_*
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -219,6 +119,9 @@ bld/
 .vs/
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
+
+# Visual Code directory
+.vscode
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
