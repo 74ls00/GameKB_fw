@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Icon[ru_RU]=mate-panel-launcher
+Name[ru_RU]=easykeymap
+Exec=/home/user/GameKB_fw/easykeymap.sh
+Name=e
+Icon=/home/user/GameKB_fw/keymapper/easykeymap/icons/keyboard/48.png

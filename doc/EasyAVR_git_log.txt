@@ -1,0 +1,17 @@
+
+
+68   2016.04.12    mohitg11         serial port linux
+99   2016.05.9     edfan            rgb led WS2812B
+117  2016.06.4     chroniX0         https://github.com/chroniX0/EasyAVR
+98   2016.06.24    scottstamp       Added KC60 support. 
+103  2016.06.26    audibleblink     личные настройки
+98   2016.07.3     MajorKoos        Add initial support for the v2 PCB 
+98   2016.07.8     Andrew-Hanlon    fw  Send hotkeys for function layer usage 
+98   2016.12.6     domoaligato      gh60_proto.py 
+107  2017.01.15    jcowgar       ! https://github.com/jcowgar/EasyAVR
+
+
+
+
+
+

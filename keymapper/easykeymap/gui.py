@@ -32,16 +32,20 @@ try:
     import tkFileDialog as filedialog
     import tkSimpleDialog as simpledialog
     import tkMessageBox as messagebox
+	
     import Tkinter as tk
+#    import ttk
+	
 except ImportError:
     from tkinter import *
     from tkinter.ttk import *
     from tkinter import filedialog
     from tkinter import simpledialog
     from tkinter import messagebox
+
     import tkinter as tk
     import tkinter.ttk as ttk
-
+	
 import pickle
 import copy
 from array import array
@@ -50,7 +54,22 @@ import os.path
 import importlib
 from glob import glob
 import traceback
+
+#! 74ls00
 from PIL import Image, ImageTk
+#import shlex #for linux https://docs.python.org/2/library/subprocess.html
+#import subprocess
+#import platform
+
+#if os.environ['PROCESSOR_ARCHITEW6432'] and platform.architecture()[0] == "32bit":
+#    sys.stdout.write('WOW64')
+#elif platform.architecture()[0] == "64bit":
+#    sys.stdout.write('AMD64')
+#else: 
+#    sys.stdout.write('x86')
+#! 74ls00 end
+
+
 
 if not hasattr(sys, 'frozen'):
     import pkg_resources
@@ -130,6 +149,8 @@ required_board_attributes = [
     'num_ind', 'num_bl_enab', 'led_definition', 'led_hardware', 'backlighting',
     'bl_modes', 'KMAC_key', 'keyboard_definition', 'alt_layouts'
 ]
+
+#!
 
 
 class GUI(object):
@@ -290,7 +311,9 @@ class GUI(object):
                               command=self.about)
         menubar.add_cascade(menu=menu_help, label='Help')
         self.root['menu'] = menubar
-# toolbar
+		
+#! 74ls00
+        # toolbar
         toolbar = Frame(self.root, borderwidth="1", relief=GROOVE)
 		
         eimgnew = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/document-new.png')))
@@ -330,8 +353,18 @@ class GUI(object):
         Separator(toolbar, orient=VERTICAL).pack(side=LEFT, fill=Y)
 		
         toolbar.pack(side=TOP, fill=X)
+#! 74ls00 end
+		
         # frame to hold info labels
-        infoframe = Frame(self.root)
+        infoframe = Frame(self.root, borderwidth="1")
+		
+#! 74ls00
+#        eimgpicker = ImageTk.PhotoImage(Image.open(self.get_pkg_path('icons/toolbar/input-keyboard16.png')))
+#        pickerButton = tk.Button(infoframe, image=eimgpicker, command=self.showpicker)
+#        pickerButton.image = eimgpicker
+#        pickerButton.pack(side=LEFT, padx=2, pady=2)
+#! 74ls00 end		
+		
         Label(infoframe, text="Hardware: ").pack(side=LEFT)
         Label(infoframe, textvariable=self.namevar).pack(side=LEFT)
         Label(infoframe, text="      Layout: ").pack(side=LEFT)
@@ -350,13 +383,14 @@ class GUI(object):
               width=2).pack(side=LEFT)
         infoframe.pack()
         Separator(self.root, orient=HORIZONTAL).pack(fill=X, pady=2)
-        
+		
         # frame to hold the editing controls
         modframe = Frame(self.root)
         Label(modframe, text="Set: ").pack(side=LEFT)
         temp = sorted(scancodes.keys())
         temp2 = [x for x in temp if not x.startswith("SCANCODE_")]
         setbox = Combobox(modframe, width=40, height=30)
+#!       setbox = Combobox(modframe, width=40, height=40)
         setbox['values'] = temp
         setbox['textvariable'] = self.bindvar
         setbox.state(['readonly'])
@@ -414,6 +448,7 @@ class GUI(object):
         macrosubframe.rowconfigure(0, weight=1)
         macrosubframe.columnconfigure(0, weight=1)
         self.macrotext = Text(macrosubframe, height=5,  font = (10))
+#!      self.macrotext = Text(macrosubframe, height=5)
         self.macrotext.bind('<<Modified>>', self.macrochange)
         self.macrotext.grid(row=0, column=0, sticky=(N, W, E, S))
         scroll = Scrollbar(macrosubframe, orient=VERTICAL,
@@ -426,7 +461,7 @@ class GUI(object):
         # set up some styles
         style = Style()
         style.configure("Gold.TButton", background="Gold")
-
+		
     def showpicker(self):
         self.pickerwindow.show()
 
@@ -1148,7 +1183,7 @@ class GUI(object):
                     parent=self.root)
                 if not answer:
                     return
-            defaultFilename = 'Untitled.hex'
+            defaultFilename = 'Untitled_FW.hex'
             if self.filename != None:
                 defaultFilename = os.path.splitext(os.path.basename(self.filename))[0] + '.hex'
             filename = filedialog.asksaveasfilename(
@@ -1715,6 +1750,7 @@ class TextWindow(simpledialog.Dialog):
         master.rowconfigure(0, weight=1)
         master.columnconfigure(0, weight=1)
         self.text = Text(master, height=30, width=80, wrap='none', font = (10))
+#!      self.text = Text(master, height=40, width=80, wrap='none')
         self.text.grid(row=0, column=0, sticky=(N, E, W, S))
         scroll = Scrollbar(master, orient=VERTICAL, command=self.text.yview)
         scroll.grid(row=0, column=1, sticky=(N, S))

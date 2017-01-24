@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+#
 # Easy AVR USB Keyboard Firmware Keymapper
 # Copyright (C) 2013-2016 David Howland
 #
@@ -39,14 +42,24 @@ try:
     from ttk import *
     import tkSimpleDialog as simpledialog
     import tkMessageBox as messagebox
+    import Tkinter as tk
+    import ttk
 except ImportError:
     from tkinter import *
     from tkinter.ttk import *
     from tkinter import simpledialog
     from tkinter import messagebox
+    import tkinter as tk
+    import tkinter.ttk as ttk
+	
+from PIL import Image, ImageTk
+import shlex #for linux https://docs.python.org/2/library/subprocess.html
+import platform
 
+#portvar = StringVar()
 
 def popup(root, filename, config):
+
     info = ProgrammingInfo()
     info.filename = os.path.normpath(filename)
     info.binformat = filename.endswith('bin')
@@ -140,6 +153,9 @@ class ProgrammingTask(object):
         logger(msg)
         time.sleep(1)
 
+    def avrmsg(self, logger):
+        msg = ("Connect AVR programmer")
+        logger(msg)
 
 class TeensyLoader(ProgrammingTask):
 
@@ -194,16 +210,24 @@ class FlipWindows(ProgrammingTask):
 class AvrdudePosix(ProgrammingTask):
 
     description = "Upload to USB AVR with AVRdude"
-    windows = False
+    windows = True
     posix = True
     teensy = False
 
     loader_tools = [
+        'avrdude.exe',
+        'avrdude'
     ]
 
     def run(self):
-        self.logger("Not implemented.")
-
+        if self.info.binformat:
+            raise ProgrammingException("avrdude requires a build in HEX format.")
+        if self.tool_path is None:
+            raise ProgrammingException("Can't find avrdude executable.")
+        self.avrmsg(self.logger)
+        cmd = ('"%s" -P com7 -c stk500v2 -p %s -C %s -U flash:w:%s:a') % (self.tool_path, self.info.device.lower(), get_pkg_path('..//..//programmer//fix_avrdude.conf '), self.info.filename)
+        self.logger(cmd)
+        self.execute(cmd)
 
 class DfuProgrammer(ProgrammingTask):
 
@@ -254,10 +278,10 @@ class ProgrammingWindow(simpledialog.Dialog):
     def collecttasks(self):
         # in the future this should be automatically scanned from a directory
         self.tasks = [
+            AvrdudePosix,	
             TeensyLoader,
             FlipWindows,
-            DfuProgrammer,
-            AvrdudePosix
+            DfuProgrammer
         ]
         # the first matching task will be pre-selected for the user
         self.besttask = None
@@ -272,18 +296,55 @@ class ProgrammingWindow(simpledialog.Dialog):
     def body(self, master):
         self.resizable(0, 0)
         self.taskvar = StringVar()
+		
         Label(master, text="Board:  ").grid(column=0, row=0, sticky=(E))
-        Label(master, text=self.info.description).grid(column=1, row=0, columnspan=3, sticky=(E,W))
+#        Label(master, text=self.info.description).grid(column=1, row=0, sticky=(E,W))#3
+        Label(master, text=self.info.description).grid(column=1, row=0, columnspan=8, sticky=(E,W))
+		
         Label(master, text="File:  ").grid(column=0, row=1, sticky=(E))
-        Label(master, text=self.info.filename).grid(column=1, row=1, columnspan=3, sticky=(E,W))
+#        Label(master, text=self.info.filename).grid(column=1, row=1, sticky=(E,W))#3
+        Label(master, text=self.info.filename).grid(column=1, row=1, columnspan=8, sticky=(E,W))
+		
         Label(master, text="Task:  ").grid(column=0, row=2, sticky=(E))
         self.combo = Combobox(master, textvariable=self.taskvar, state='readonly')
         self.combo['values'] = [t.description for t in self.tasks]
         self.combo.bind('<<ComboboxSelected>>', self.taskselect)
-        self.combo.grid(column=1, row=2, sticky=(E,W))
+        self.combo.grid(column=1, row=2, columnspan=4, sticky=(E,W))
         self.button = Button(master, text="Run", command=self.run)
         self.button.state(['disabled'])
-        self.button.grid(column=2, row=2, columnspan=2, sticky=(W))
+        self.button.grid(column=2, row=2, columnspan=7, sticky=(E))
+#!		
+ #       portvartx = self.portvar.get()
+        self.portvar = StringVar()
+        Label(master, text="Port:  ").grid(column=0, row=3, sticky=(E))
+        self.entryPort = Entry(master, textvariable=self.portvar)
+        self.entryPort.grid(column=1, row=3, sticky=(E,W))		
+		
+#        self.comboPort = Entry(master, textvariable=self.taskvar)
+ #       self.logger(self.comboPort)
+
+		
+        Label(master, text="  Programmer:  ").grid(column=2, row=3, sticky=(W))		
+        self.comboProgrammer = Combobox(master, textvariable=self.taskvar, state='readonly')
+        self.comboProgrammer.grid(column=3, row=3, sticky=(E,W))
+		
+        Label(master, text="  Param:  ").grid(column=4, row=3, sticky=(W))		
+        self.comboParam = Combobox(master, textvariable=self.taskvar, state='readonly')
+        self.comboParam.grid(column=5, row=3, sticky=(E,W))
+		
+        eimginfoprogram = ImageTk.PhotoImage(Image.open(get_pkg_path('icons/toolbar/port.png')))
+        self.infoProgramButton = tk.Button(master, image=eimginfoprogram, relief=FLAT, command=self.infoprogram)
+        self.infoProgramButton.grid(column=6, row=3, sticky=(W))
+        self.infoProgramButton.image = eimginfoprogram
+		
+        eimgbuildandupload = ImageTk.PhotoImage(Image.open(get_pkg_path('icons/toolbar/media-flash.png')))
+        self.buildanduploadButton = tk.Button(master, image=eimgbuildandupload, relief=FLAT, command=self.fprogram)
+        self.buildanduploadButton.grid(column=7, row=3, sticky=(W))
+        self.buildanduploadButton.image = eimgbuildandupload	
+		
+
+
+		
         master.columnconfigure(1, weight=1)
         
         if self.besttask is not None:
@@ -291,9 +352,11 @@ class ProgrammingWindow(simpledialog.Dialog):
             self.taskselect(None)
         
         self.text = Text(master, width=90, height=20, wrap=WORD)
-        self.text.grid(column=0, row=3, columnspan=3, sticky=(N, W, E, S))
+        self.text.grid(column=0, row=4, columnspan=9, sticky=(N, W, E, S))
+#        self.text.grid(column=0, row=4, columnspan=3, sticky=(N, W, E, S))
+
         self.scroll = Scrollbar(master, orient=VERTICAL, command=self.text.yview)
-        self.scroll.grid(column=3, row=3, sticky=(N, W, E, S))
+        self.scroll.grid(column=9, row=4, sticky=(N, W, E, S))
         self.text["yscrollcommand"] = self.scroll.set
         
         self.bodyframe = master
@@ -367,3 +430,22 @@ class ProgrammingWindow(simpledialog.Dialog):
             self.text.see('end')
             self.text.update_idletasks()
         self.bodyframe.after(250, self.showtext)
+
+#   просмотр порта			
+    def infoprogram(self):
+        if sys.platform == 'win32':
+            subprocess.Popen('mmc devmgmt.msc')
+        elif sys.platform == 'linux' or 'linux2':
+            subprocess.Popen(shlex.split('/usr/bin/mate-terminal --title port -e '+get_pkg_path('..//..//programmer//linux//port.sh')))
+        else:
+            return
+#        subprocess.Popen('notepad.exe'+' '+self.get_pkg_path('..//..//programmer//avrdude.bat'))
+
+#   запуск програматора
+    def fprogram(self):
+        if sys.platform == 'win32':
+            subprocess.Popen(get_pkg_path('..//..//programmer//avrdude.bat'))
+        elif sys.platform == 'linux' or 'linux2':
+            subprocess.Popen(shlex.split('/usr/bin/mate-terminal --title avrdude -e '+get_pkg_path('..//..//programmer//linux//avrdude.sh')))
+        else:
+            return
