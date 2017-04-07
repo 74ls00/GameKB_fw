@@ -23,6 +23,11 @@ various AVRs.
 
 from __future__ import print_function
 
+#!
+#import setupcon
+#from setupcon import setup_console
+#setupcon.setup_console()
+
 import os
 import os.path
 import subprocess
