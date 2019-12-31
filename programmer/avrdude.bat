@@ -6,7 +6,8 @@ set avrdude=%~d0%~p0win32
 cls
 
 set port=com7
-set fw=..\keymapper\mykb.hex
+rem set fw=..\keymapper\mykb.hex
+set fw=..\keymapper\my2019.hex
 
 echo.
 echo PORT: %port%  FW: %fw%
